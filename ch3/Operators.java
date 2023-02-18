@@ -145,7 +145,19 @@ public class Operators {
         String s = x % 2 == 0 ? " is an even number" : " is an odd number";
         System.out.println(x + s); // 4 is an even number
 */
+/*        byte b1 = 3, b2 = 4;
+//        b1 = b1 + b2; // compiler error
+        b1 = (byte)(b1 + b2); // ok
+        b1 += b2; // ok, no cast required*/
 
+/*
+        int x = 2;
+        x *= 2 + 5; // x = x * (2 + 5) = 2 * 7 = 14
+        System.out.println(x); // 14
+*/
+        int k=1;
+        k += (k=4) * (k+2);
+        System.out.println(k); // 25
     }
 
 }
