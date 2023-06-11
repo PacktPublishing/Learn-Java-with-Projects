@@ -3,7 +3,8 @@ class Animal{
     public void eat(){}
 }
 class Cow extends Animal{
-    public void eat(String s){} // overloaded
+    public void eat(){}         // overriding, same signature
+    public void eat(String s){} // overloaded, different signature!
 }
 public class OverloadTest {
     public void calc(int x, double y){} //  calc(int, double)
