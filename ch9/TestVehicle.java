@@ -1,6 +1,38 @@
 package ch9;
 
 class Vehicle{
+    double cost = 100.0;        // instance data
+    static int age = 1;         // class data
+    public void move(){         // instance method
+        System.out.println("Vehicle::move()");
+    }
+    public static void sm() {   // class method
+        System.out.println("Vehicle::sm()");
+    }
+}
+class Car extends Vehicle{
+    double cost = 20_000.0; // hiding
+    static int age = 2;     // hiding
+
+    @Override public void move(){   // overriding
+        System.out.println("Car::move()");
+    }
+    public static void sm() {       // hiding
+        System.out.println("Car::sm()");
+    }
+}
+public class TestVehicle {
+    public static void main(String[] args) {
+        Vehicle v = new Car();
+        System.out.println(v.cost); // 100.0
+        System.out.println(v.age);  // 1
+        v.sm();                     // Vehicle::sm()
+        v.move();                   // Car::move()
+    }
+}
+
+/*
+class Vehicle{
     public void move(){ System.out.println("Vehicle::move"); }
 }
 class Car extends Vehicle{
@@ -29,6 +61,7 @@ public class TestVehicle {
     }
 }
 
+ */
 /*
 class Vehicle{
     public void move(){ System.out.println("Vehicle::move"); }
