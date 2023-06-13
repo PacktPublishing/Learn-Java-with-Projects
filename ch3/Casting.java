@@ -30,11 +30,14 @@ public class Casting {
 //        byte b  = 127;          // narrowing, int to byte, special rule integral
 //        byte b2 = 128;          // out of range error
         char c = 12;
-        char c2 = 90_000;
+        // incompatible types: possible lossy conversion from int to char
+        // char c2 = 90_000;
         short s = 12;           // 12 is a literal, ok
-        s = c;
+        // incompatible types: possible lossy conversion from char to short
+        // s = c;
         s = (short) c;
-        c = s;
+        // incompatible types: possible lossy conversion from short to char
+        // c = s;
         c = (char) s;
 
         final char c1 = 12;
