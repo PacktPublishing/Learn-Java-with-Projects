@@ -2,7 +2,7 @@ package ch9;
 
 final class Earth{}
 // cannot extend a 'final' class
-class SubEarth extends Earth{}
+//class SubEarth extends Earth{}
 
 class Pen{
     final void write(){}
@@ -12,19 +12,19 @@ class Pen{
 }
 class FountainPen extends Pen{
     // cannot override a 'final' method
-    @Override void write(){}
+//    @Override void write(){}
 }
 public class DemoOfFinal {
     final int ONE_YEAR = 1;
     void print(final String name, final int age){
         // primitives
-        age = age + ONE_YEAR;
+        //age = age + ONE_YEAR;
         // references - ok to access the object
         System.out.println(name.toUpperCase());
         // references - cannot modify the reference
-        name = "Alexander";
+        //name = "Alexander";
 
-        ONE_YEAR = 2; // cannot change a constant
+        //ONE_YEAR = 2; // cannot change a constant
     }
 }
 
