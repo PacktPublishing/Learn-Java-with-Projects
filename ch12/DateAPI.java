@@ -89,20 +89,20 @@ public class DateAPI {
 
     public static void customFormats(){
         ZonedDateTime zdt = ZonedDateTime.now();
-        System.out.println(zdt);      // 2023-07-10T21:06:28.527921800+01:00[Europe/Dublin]
+        System.out.println(zdt);      // 2023-07-11T09:05:50.792542600+01:00[Europe/Dublin]
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yy-MMM-dd E D");
-        System.out.println(zdt.format(dateFormatter));// 23-Jul-10 Mon 191
+        System.out.println(zdt.format(dateFormatter));// 23-Jul-11 Tue 192
 
         DateTimeFormatter timeFormatter1 = DateTimeFormatter.ofPattern("hh:mm:ss a z G");
-        System.out.println(zdt.format(timeFormatter1));// 09:06:28 p.m. IST AD
+        System.out.println(zdt.format(timeFormatter1));// 09:05:50 a.m. IST AD
 
         // how to insert text
         DateTimeFormatter dateFormatter2 =
-                DateTimeFormatter.ofPattern("'The year is: 'yyyy'. Month is: 'MMMM'. Day of month is: 'dd'.'");
-        System.out.println(zdt.format(dateFormatter2));// The year is: 2023. Month is: July. Day of month is: 10.
+                DateTimeFormatter.ofPattern("'Year: 'yyyy'. Month: 'MMMM'. Day: 'dd'.'");
+        System.out.println(zdt.format(dateFormatter2));// Year: 2023. Month: July. Day: 11.
 
         // parse
-        String dateTimeString = "2023-07-10 22:10";
+        String dateTimeString = "2023-07-10 22:10"; // last night
         DateTimeFormatter timeFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime ldt = LocalDateTime.parse(dateTimeString, timeFormatter2);
         System.out.println(ldt);    // 2023-07-10T22:10
