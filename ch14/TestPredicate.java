@@ -7,15 +7,37 @@ import java.util.function.Predicate;// pre-defined in the API
 interface Evaluate<T> {
     boolean check(T t);
 }
+interface FI{
+//    void m();
+//    int m(int x);
+    String m(String a, String b);
+}
 public class TestPredicate {
     public static void main(String[] args) {
-        Evaluate<Integer> isItPositive = (Integer n) -> {return n > 0;};
-        System.out.println(isItPositive.check(-1));//false
-        System.out.println(isItPositive.check(+1));//true
-
-        Evaluate<String> isMale = s -> s.startsWith("Mr.");
-        System.out.println(isMale.check("Mr. Sean Kennedy"));//true
-        System.out.println(isMale.check("Ms. Maaike van Putten"));//false
+//        Evaluate<Integer> isItPositive = (Integer n) -> {return n > 0;};
+//        System.out.println(isItPositive.check(-1));//false
+//        System.out.println(isItPositive.check(+1));//true
+//
+//        Evaluate<String> isMale = s -> s.startsWith("Mr.");
+//        System.out.println(isMale.check("Mr. Sean Kennedy"));//true
+//        System.out.println(isMale.check("Ms. Maaike van Putten"));//false
+        tableExamples();
+    }
+    public static void tableExamples(){
+//        FI fi1 = () -> System.out.println("lambda");
+//        fi1.m(); // lambda
+//        FI fi2 = () -> {System.out.println("lambda"); } ;
+//        fi2.m(); // lambda
+//
+//        FI fi3 = (int x) -> { return x * x;};
+//        System.out.println(fi3.m(5)); //25
+//        FI fi4 = x -> x * x;
+//        System.out.println(fi4.m(6)); // 36
+//
+//        FI fi5 = (s1 ,s2) -> s1 + s2;
+//        System.out.println(fi5.m("Sean", " Kennedy")); // Sean Kennedy
+        FI fi6 = (String s1 , String s2) -> {return s1 + s2; };
+        System.out.println(fi6.m("Sean", " Kennedy")); // Sean Kennedy
     }
 }
 
