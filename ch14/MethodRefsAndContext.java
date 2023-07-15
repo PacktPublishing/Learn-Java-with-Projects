@@ -4,6 +4,11 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+class Person{
+    public static Integer howMany(Person... people){
+        return people.length;
+    }
+}
 public class MethodRefsAndContext {
     public static void main(String[] args) {
         // No Person being passed in => Supplier
@@ -24,9 +29,4 @@ public class MethodRefsAndContext {
         System.out.println(lambda3.apply(new Person(), new Person()));  // 2
         System.out.println(mr3.apply(new Person(), new Person()));      // 2
     }
-}
-class Person{
-    public static Integer howMany(Person... people){
-        return people.length;
-    } 
 }
