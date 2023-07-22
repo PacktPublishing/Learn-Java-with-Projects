@@ -21,9 +21,7 @@ class Cat{
 }
 public class ProcessFile {
     public static void main(String []args){
-        // Relative path built from "current working directory", which is
-        // obtained from user.dir setting -> System.getProperty("user.dir")
-        // Mine was: C:\Users\skennedy\IdeaProjects\JavaFromBeginnerToProfessional
+        // Relative path built from: System.getProperty("user.dir")
 //        System.out.println(System.getProperty("user.dir"));
         List<Cat> cats = loadCats("out\\production\\" +
                 "JavaFromBeginnerToProfessional\\ch15\\cats.txt");
@@ -38,6 +36,11 @@ public class ProcessFile {
             });
         } catch (IOException ioe) {
             ioe.printStackTrace();
+        }
+        for(int i=0; i<3; i++){
+            switch(i){
+                case 1:boolean flag=false;
+            }
         }
         return cats;
     }

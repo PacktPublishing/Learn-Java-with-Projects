@@ -4,18 +4,19 @@ import java.util.stream.Stream;
 
 public class InfiniteStreams {
     public static void main(String[] args) {
-//        for(int i=1; i<50; i++){
+//        for(int i=1; i<100; i++){
 //            System.out.println(rand());
 //        }
 
-        iterate();
-//        iterateWithLimit();
-
+//        iterate();
+        iterateWithLimit();
+//        iterateWithPredicate();
+//        generate();
 
     }
     public static int rand(){
         return (int) (Math.random() * 10);
-    }
+    } // 0..9 inclusive
 
     public static void iterate(){
         
@@ -43,7 +44,18 @@ public class InfiniteStreams {
             .forEach(System.out::println);
         
     }
-    
+    public static void iterateWithPredicate(){
+
+        // finite stream of ordered numbers
+        // 2, 4, 6, 8, 10, 12, 14, 16, 18, 20
+        Stream
+                .iterate(2,         // seed
+                        n -> n <= 20,   // Predicate
+                        n -> n + 2)     // UnaryOperator
+                .forEach(System.out::println);
+
+    }
+
     public static void generate(){
         // infinite stream of random unordered numbers 
         // between 0..9 inclusive

@@ -1,19 +1,58 @@
 package ch15;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+class Car{
+    private String brand;
+    private int year;
+    public Car(String brand, int year) {
+        this.brand = brand;
+        this.year  = year;
+    }
+    public String getBrand() {
+        return brand;
+    }
+    // other methods omitted
+}
 public class CollectorsExamples {
     public static void main(String[] args) {
+//        doGetAsTreeSet();
+//        doGetAsArbitraryList();
         //doPartitioning4();
-        doGroupingBy3();
+//        doGroupingBy3();
+//        doAveragingInt();
+//        doCollectToMap1();
+//        doCollectToMapException();
+//        doCollectToMapMerge();
+        doCollectToMapTreeMap();
+    }
+    public static void doGetAsTreeSet(){
+
+        var cars = new ArrayList<Car>();
+        cars.add(new Car("Tesla", 2021));
+        cars.add(new Car("Ford", 2022));
+        cars.add(new Car("Audi", 2018));
+        Set<String> treeSet = cars.stream()
+                .map(car -> car.getBrand())// Car::getBrand
+                .collect(Collectors.toCollection(TreeSet::new));
+        System.out.println(treeSet);// [Audi, Ford, Tesla]
+
+    }
+    public static void doGetAsArbitraryList(){
+
+        var cars = new ArrayList<Car>();
+        cars.add(new Car("Tesla", 2021));
+        cars.add(new Car("Ford", 2022));
+        cars.add(new Car("Audi", 2018));
+        List<String> list = cars.stream()
+                .map(car -> car.getBrand())// Car::getBrand
+                .collect(Collectors.toList());
+        System.out.println(list);// [Tesla, Ford, Audi]
+
     }
     public static void doPartitioning4(){
-        
+
         Stream<String> names = Stream.of("Alan", "Teresa", "Mike", "Alan", "Peter");
         Map<Boolean, Set<String>> map =
                 names.collect(
@@ -95,44 +134,55 @@ public class CollectorsExamples {
         System.out.println(map);// {3=[Joe, Tom, Tom, Ann], 4=[Alan], 5=[Peter], 6=[Martin]}
 
     }
-    public static void doCollectToMap3(){
+    public static void doCollectToMapTreeMap(){
         
-        // The maps returned are HashMaps but this is not guaranteed. What if we wanted
+        // The maps returned are not guaranteed. What if we wanted
         // a TreeMap implementation so our keys would be sorted. The last argument 
         // caters for this.
         TreeMap<String, Integer> map = 
                 Stream.of("cake", "biscuits", "apple tart", "cake")
                 .collect(
-                    Collectors.toMap(s -> s,            // key is the String     
-                                     s -> s.length(),   // value is the length of the String
-                                    (len1, len2) -> len1 +len2, // what to do if we have 
-                                                                // duplicate keys
+                    Collectors.toMap(String::toString, // dessert name is the key
+                                     String::length,   // length is the value
+                                     (len1, len2) -> len1 +len2, // what to do if we have
+                                                                // duplicate keys:
                                                                 //    - add the *values*
-                                    () -> new TreeMap<>() ));// TreeMap::new works
+                                     TreeMap::new ));   // Supplier
         System.out.println(map);// {apple tart=10, biscuits=8, cake=8} Note: cake maps to 8
         System.out.println(map.getClass());// class java.util.TreeMap
         
     }
-    public static void doCollectToMap2(){
+    public static void doCollectToMapMerge(){
         
-        // We want a map: number of characters in dessert name -> dessert name
-        // However, 2 of the desserts have the same length (cake and tart) and as 
-        // length is our key and we can't have duplicate keys, this leads to an 
-        // exception as Java does not know what to do...
-        //    IllegalStateException: Duplicate key 4 (attempted merging values cake and tart)
-        // To get around this, we can supply a merge function, whereby we append the 
-        // colliding keys values together.
+        // To get around the duplicate keys issue, we can supply a merge function,
+        // whereby we append the colliding keys values together.
         Map<Integer, String> map = 
                 Stream.of("cake", "biscuits", "tart")
                 .collect(
-                    Collectors.toMap(s -> s.length(),// key is the length 
-                                     s -> s,         // value is the String
+                    Collectors.toMap(s -> s.length(),// length is the key
+                                     s -> s,         // dessert name is the value
                                      (s1, s2) -> s1 + "," + s2)// Merge function - what to
                                                                // do if we have duplicate keys 
                                                                //   - append the values
                 );
         System.out.println(map);// {4=cake,tart, 8=biscuits}
         
+    }
+    public static void doCollectToMapException(){
+
+        // We want a map: number of characters in dessert name -> dessert name.
+        // However, 2 of the desserts have the same length (cake and tart).
+        // As length is our key and we can't have duplicate keys, this leads to an
+        // exception as Java does not know what to do...
+        //    IllegalStateException: Duplicate key 4 (attempted merging values cake and tart)
+        Map<Integer, String> map =
+                Stream.of("cake", "biscuits", "tart")
+                        .collect(
+                                Collectors.toMap(String::length,   // length is the key
+                                                 String::toString) // dessert name is the value
+                        );
+        System.out.println(map);
+
     }
     public static void doCollectToMap1(){
         
@@ -142,8 +192,10 @@ public class CollectorsExamples {
         Map<String, Integer> map = 
                 Stream.of("cake", "biscuits", "apple tart")
                 .collect(
-                    Collectors.toMap(s -> s,         // Function for the key 
-                                     s -> s.length())// Function for the value
+//                        Collectors.toMap(s -> s,          // lambda key
+//                                         s -> s.length()) // lambda value
+                        Collectors.toMap(String::toString,  // Function for the key
+                                         String::length)    // Function for the value
                 );
         System.out.println(map);
         
@@ -161,8 +213,8 @@ public class CollectorsExamples {
         Double avg = Stream.of("cake", "biscuits", "apple tart")
                         // averagingInt(ToIntFunction) functional method is:
                         //      int applyAsInt(T value);
-                        .collect(Collectors.averagingInt(s -> s.length()));
-        System.out.println(avg);  // 7.333333333333333  
+                .collect(Collectors.averagingInt(s -> s.length())); // String::length
+        System.out.println(avg);  // 7.333333333333333
     
     }
 }
