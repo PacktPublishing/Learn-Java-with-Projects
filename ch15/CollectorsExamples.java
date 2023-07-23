@@ -19,13 +19,16 @@ public class CollectorsExamples {
     public static void main(String[] args) {
 //        doGetAsTreeSet();
 //        doGetAsArbitraryList();
-        //doPartitioning4();
-//        doGroupingBy3();
 //        doAveragingInt();
-//        doCollectToMap1();
-//        doCollectToMapException();
-//        doCollectToMapMerge();
-        doCollectToMapTreeMap();
+//        collectToMap();
+//        collectToMapWithException();
+//        collectToMapAndMerge();
+//        collectToTreeMap();
+//        groupByMapToList();
+//        groupByMapToSet();
+//        groupByTreeMapToList();
+        partitioningToList();
+//        partitioningToSet();
     }
     public static void doGetAsTreeSet(){
 
@@ -51,9 +54,10 @@ public class CollectorsExamples {
         System.out.println(list);// [Tesla, Ford, Audi]
 
     }
-    public static void doPartitioning4(){
+    public static void partitioningToSet(){
 
-        Stream<String> names = Stream.of("Alan", "Teresa", "Mike", "Alan", "Peter");
+        Stream<String> names = Stream.of("Alan", "Teresa", "Mike",
+                                                "Alan", "Peter"); // "Alan" here twice
         Map<Boolean, Set<String>> map =
                 names.collect(
                     Collectors.partitioningBy(
@@ -85,20 +89,22 @@ public class CollectorsExamples {
         System.out.println(map);// {false=[Mike, Alan], true=[Thomas, Teresa, Peter]}
 
     }
-    public static void doPartitioning1(){
+    public static void partitioningToList(){
         
-        Stream<String> names = Stream.of("Thomas", "Teresa", "Mike", "Alan", "Peter");
+        Stream<String> names = Stream.of("Thomas", "Teresa",
+                                                "Mike", "Alan", "Peter");
         Map<Boolean, List<String>> map =
                 names.collect(
                     // pass in a Predicate
                     Collectors.partitioningBy(s -> s.startsWith("T"))
                 );
-        System.out.println(map);// {false=[Mike, Alan, Peter], true=[Thomas, Teresa]}
+        System.out.println(map);// {false=[Mike, Alan, Peter],
+                                // true=[Thomas, Teresa]}
 
     }
-    public static void doGroupingBy3(){
-        
-        Stream<String> names = Stream.of("Martin", "Peter", "Joe", "Tom", "Tom", "Ann", "Alan");
+    public static void groupByTreeMapToList(){
+
+        Stream<String> names = Stream.of("Martin", "Peter", "Tom", "Tom", "Ann");
         Map<Integer, List<String>> map =
                 names.collect(
                     Collectors.groupingBy(
@@ -106,35 +112,36 @@ public class CollectorsExamples {
                             TreeMap::new,       // map type Supplier
                             Collectors.toList())// downstream collector
                 );
-        System.out.println(map);// {3=[Joe, Tom, Tom, Ann], 4=[Alan], 5=[Peter], 6=[Martin]}
+        System.out.println(map);// {3=[Tom, Tom, Ann], 5=[Peter], 6=[Martin]}
         System.out.println(map.getClass());// class java.util.TreeMap
 
     }
-    public static void doGroupingBy2(){
-        
-        Stream<String> names = Stream.of("Martin", "Peter", "Joe", "Tom", "Tom", "Ann", "Alan");
+    public static void groupByMapToSet(){
+
+        Stream<String> names = Stream.of("Martin", "Peter", "Tom", "Tom", "Ann");
         Map<Integer, Set<String>> map =
                 names.collect(
                     Collectors.groupingBy(
                             String::length,     // key Function
                             Collectors.toSet()) // what to do with the values
                 );
-        System.out.println(map);// {3=[Ann, Joe, Tom], 4=[Alan], 5=[Peter], 6=[Martin]}
+        System.out.println(map);// {3=[Ann, Tom], 5=[Peter], 6=[Martin]}
+        System.out.println(map.getClass());// class java.util.HashMap
 
     }
-    public static void doGroupingBy1(){
+    public static void groupByMapToList(){
         
-        Stream<String> names = Stream.of("Martin", "Peter", "Joe", "Tom", "Tom", "Ann", "Alan");
+        Stream<String> names = Stream.of("Martin", "Peter", "Tom", "Tom", "Ann");
         Map<Integer, List<String>> map =
                 names.collect(
                     // passing in a Function that determines the 
                     // key in the Map
-                    Collectors.groupingBy(String::length) // s -> s.length()
+                    Collectors.groupingBy(String::length) // name -> name.length()
                 );
-        System.out.println(map);// {3=[Joe, Tom, Tom, Ann], 4=[Alan], 5=[Peter], 6=[Martin]}
+        System.out.println(map);// {3=[Tom, Tom, Ann], 5=[Peter], 6=[Martin]}
 
     }
-    public static void doCollectToMapTreeMap(){
+    public static void collectToTreeMap(){
         
         // The maps returned are not guaranteed. What if we wanted
         // a TreeMap implementation so our keys would be sorted. The last argument 
@@ -152,7 +159,7 @@ public class CollectorsExamples {
         System.out.println(map.getClass());// class java.util.TreeMap
         
     }
-    public static void doCollectToMapMerge(){
+    public static void collectToMapAndMerge(){
         
         // To get around the duplicate keys issue, we can supply a merge function,
         // whereby we append the colliding keys values together.
@@ -168,7 +175,7 @@ public class CollectorsExamples {
         System.out.println(map);// {4=cake,tart, 8=biscuits}
         
     }
-    public static void doCollectToMapException(){
+    public static void collectToMapWithException(){
 
         // We want a map: number of characters in dessert name -> dessert name.
         // However, 2 of the desserts have the same length (cake and tart).
@@ -184,7 +191,7 @@ public class CollectorsExamples {
         System.out.println(map);
 
     }
-    public static void doCollectToMap1(){
+    public static void collectToMap(){
         
         // We want a map: dessert name -> number of characters in dessert name
         // Output:

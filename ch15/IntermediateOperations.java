@@ -32,7 +32,12 @@ public class IntermediateOperations {
     public static void main(String[] args) {
         //doSorted2();
         //doLimit();   
-        doSortedOther();
+//        doSortedOther();
+//        doFilter();
+//        doDistinct();
+//        doMap();
+//        doFlatMap();
+        doSorted2();
     }
     public static void doSortedOther() {
         
@@ -59,8 +64,7 @@ public class IntermediateOperations {
         Person john = new Person("John", 23);
         Person mary = new Person("Mary", 25);
         Stream.of(mary,john)
-              //.sorted(Comparator.comparing(Person::getAge))
-                .sorted(Comparator.comparing(p -> p.getAge()))
+                .sorted(Comparator.comparing(p -> p.getAge())) // Person::getAge
                 .forEach(System.out::print);
     
     }
@@ -91,15 +95,18 @@ public class IntermediateOperations {
         
     }
     public static void doFlatMap() {
-        
-        List<String> list1 = Arrays.asList("sean", "desmond");
-        List<String> list2 = Arrays.asList("mary", "ann");
-        Stream<List<String>> streamOfLists = Stream.of(list1, list2);
-        
+        List<String> nothing = List.of();
+        List<String> list1 = Arrays.asList("Sean");
+        List<String> list2 = Arrays.asList("Maike", "van", "Putten");
+        Stream<List<String>> streamOfLists = Stream.of(nothing, list1, list2);
+        streamOfLists.forEach(System.out::print); // [][Sean][Maike, van, Putten]
+        System.out.println(); // blank line to separate outputs
+
         // flatMap(Function(T, R)) IN:T OUT:R
-        //  flatMap(List<String>, Stream<String>)
+        //  flatMap(Function(List<String>, Stream<String>))
+        streamOfLists = Stream.of(nothing, list1, list2);
         streamOfLists.flatMap(list -> list.stream())
-                .forEach(System.out::print);// seandesmondmaryann
+                .forEach(System.out::print);// SeanMaikevanPutten
     }
     public static void doMap() {
         
@@ -112,9 +119,9 @@ public class IntermediateOperations {
     public static void doLimit() {
         
         // Stream<T> limit(long maxSize)
-        // limit is a short-circuiting stateful 
-        // intermediate operation. Lazy evaluation - 66, 77, 88 and 99
-        // are not streamed as they are not needed (limit of 2 i.e. 44 and 55).
+        // limit is a short-circuiting stateful intermediate operation.
+        // Lazy evaluation - 66, 77, 88 and 99 are not streamed as they
+        // are not needed (limit of 2 i.e. 44 and 55).
         // Output: 
         //  A - 11 A - 22 A - 33 A - 44 B - 44 C - 44 A - 55 B - 55 C - 55
         Stream.of(11,22,33,44,55,66,77,88,99)
@@ -128,11 +135,12 @@ public class IntermediateOperations {
         
         // Stream<T> distinct()
         // distinct() is a stateful intermediate operation
-        // Output: 1.eagle 2.eagle 1.eagle 1.EAGLE 2.EAGLE
+        // Output: Before: eagle, After: eagle
+        //         Before: eagleBefore: EAGLE, After: EAGLE
         Stream.of("eagle", "eagle", "EAGLE")
-                .peek(s -> System.out.print(" 1."+s))
+                .peek(s -> System.out.print("Before: "+s))
                 .distinct()
-                .forEach(s -> System.out.print(" 2."+s));
+                .forEach(s -> System.out.print(", After: "+s + "\n"));
         
     }
     public static void doFilter() {
@@ -140,9 +148,10 @@ public class IntermediateOperations {
         // Stream<T> filter(Predicate)
         // The filter() method returns a Stream with the elements that
         // MATCH the given predicate.
-        Stream.of("galway", "mayo", "roscommon")
-                .filter(countyName -> countyName.length() > 5)
-                .forEach(System.out::print);// galwayroscommon
+        Stream.of("Canada", "Ireland", "Spain")
+                .filter(country -> country.length() > 5)
+                .forEach(System.out::print);// CanadaIreland
+
     }
     
 }
