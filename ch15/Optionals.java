@@ -8,7 +8,27 @@ public class Optionals {
     
     public static void main(String[] args) {
 //        doOptionalPrimitiveAverage();
-        doOptionalAverage();
+//        doOptionalAverage();
+//        createOptionals();
+        doOptionalNull();
+    }
+    public static void createOptionals(){
+        Optional opt1 = Optional.empty();
+//        System.out.println(opt1.get()); // NoSuchElementException
+        opt1.ifPresent(o -> System.out.println("opt1: "+o)); // no exception
+
+        Optional opt2 = Optional.of(23);
+//        Optional.of(null); // NullPointerException
+        opt2.ifPresent(o -> System.out.println("opt2: "+o)); // opt2: 23
+
+        Optional opt3 = Optional.ofNullable(23);
+        opt3.ifPresent(o -> System.out.println("opt3: "+o)); // opt3: 23
+
+        Optional opt4 = Optional.ofNullable(null);
+        opt4.ifPresent(o -> System.out.println("opt4: "+o));
+        if(opt4.isEmpty()){
+            System.out.println("opt4 is empty!");           // opt4 is empty!
+        }
     }
     
     public static void doOptionalPrimitiveAverage(){
@@ -26,43 +46,37 @@ public class Optionals {
     public static void doOptionalNull(){
         Optional<String> optSK = howToDealWithNull("SK");
         optSK.ifPresent(System.out::println);// SK
-        Optional<String> optNull = howToDealWithNull(null);
+
+        Optional<String> emptyOpt = howToDealWithNull(null);
         System.out.println(
-                optNull.orElseGet( 
+                emptyOpt.orElseGet(
                         () -> "Empty optional"));// Empty optional
     }
     public static Optional<String> howToDealWithNull(String param){
-        // Optional optReturn = param == null ? Optional.empty() : Optional.of(param);
-        Optional optReturn = Optional.ofNullable(param); // same as previous line
-        return optReturn;
+        // return param == null ? Optional.empty() : Optional.of(param);
+        return Optional.ofNullable(param); // same as line above
     }
-    
-    public static void doOptionalAverage(){
-        
-       Optional<Double> optAvg = calcAverage(50, 60, 70);
-        // if you do a get() and the Optional is empty you get:
-        //    NoSuchElementException: No value present
-        // boolean isPresent() protects us from that.
-        if(optAvg.isPresent()){
-            System.out.println(optAvg.get()); // 60.0
-        }
-        // void ifPresent(Consumer c)
-        optAvg.ifPresent(System.out::println);// 60.0
-        // T orElse(T t)
-        System.out.println(optAvg.orElse(Double.NaN)); // 60.0
-        
-        Optional<Double> optAvg2 = calcAverage();// will return an empty Optional
-        System.out.println(optAvg2.orElse(Double.NaN)); // NaN
-        // T orElseGet(Supplier<T> s)
-        System.out.println(optAvg2.orElseGet(() -> Math.random())); // 0.8524556508038182
-        
-    }
+
     // a long way to calculate average (just for showing Optional)
-    public static Optional<Double> calcAverage(int... scores){
-        if(scores.length == 0) return Optional.empty();
-        int sum=0;
-        for(int score:scores) sum += score;
-        return Optional.of((double)sum / scores.length);
+    public static Optional<Double> calcAverage(int... grades){
+        if(grades.length == 0) return Optional.empty();
+        int total=0;
+        for(int grade:grades) total += grade;
+        return Optional.of((double)total / grades.length);
+    }
+    public static void doOptionalAverage(){
+       Optional<Double> valueInOptional = calcAverage(50, 60, 70);
+        if(valueInOptional.isPresent()){
+            System.out.println(valueInOptional.get()); // 60.0
+        }
+        valueInOptional.ifPresent(System.out::println);// 60.0
+        System.out.println(valueInOptional.orElse(Double.NaN)); // 60.0
+        
+        Optional<Double> emptyOptional = calcAverage();// will return an empty Optional
+        System.out.println(emptyOptional.orElse(Double.NaN)); // NaN
+        System.out.println(emptyOptional.orElseGet(() -> Math.random())); // 0.8524556508038182
+//        System.out.println(emptyOptional.orElseThrow()); // NoSuchElementException
+        System.out.println(emptyOptional.orElseThrow(() -> new RuntimeException())); // RuntimeException
     }
 
 }

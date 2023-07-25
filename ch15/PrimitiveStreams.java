@@ -1,5 +1,6 @@
 package ch15;
 
+import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
@@ -10,30 +11,57 @@ import java.util.stream.Stream;
 
 public class PrimitiveStreams {
     public static void main(String[] args) {
-        //usingSum();
+//        usingSum();
        // ranges();
        //mappingObjectStreams();
-       mappingPrimitiveStreams();
+//       mappingPrimitiveStreams();
 //       maxMinAverage();
-//       stats(IntStream.of(5, 10, 15, 20));
-//       stats(IntStream.empty());
+       stats(IntStream.of(5, 10, 15, 20));
+       stats(IntStream.empty());
+//        creatingFinitePrimitiveStreams();
+//        creatingInfinitePrimitiveStreams();
+    }
+    public static void creatingInfinitePrimitiveStreams(){
+        // DoubleStream generate(DoubleSupplier)
+        //     DoubleSupplier is a functional interface. Its
+        //     functional method is: double getAsDouble()
+        DoubleStream random    = DoubleStream.generate(() -> Math.random());
+        random.limit(5).forEach(System.out::println);
+
+        // IntStream iterate(int seed, IntUnaryOperator f)
+        //     IntUnaryOperator is a functional interface. Its
+        //     functional method is: int applyAsInt(int)
+        IntStream even = IntStream.iterate(2, (n) -> n + 2);
+        even.limit(5).forEach(System.out::println);
+    }
+    public static void creatingFinitePrimitiveStreams(){
+        int[] ia    = {1,2,3};
+        double[] da = {1.1, 2.2, 3.3};
+        long[] la   = {1L, 2L, 3L};
+
+        IntStream iStream1      = Arrays.stream(ia);
+        DoubleStream dStream1   = Arrays.stream(da);
+        LongStream lStream1     = Arrays.stream(la);
+        System.out.println(iStream1.count() + ", " +
+                dStream1.count() + ", " + lStream1.count());// 3, 3, 3
+
+        IntStream iStream2       = IntStream.of(1, 2, 3);
+        DoubleStream dStream2    = DoubleStream.of(1.1, 2.2, 3.3);
+        LongStream lStream2      = LongStream.of(1L, 2L, 3L);
+        System.out.println(iStream2.count() + ", " +
+                dStream2.count() + ", " + lStream2.count());// 3, 3, 3
+
+        stats(IntStream.of(5, 10, 15, 20));
+        stats(IntStream.empty());
     }
     public static void stats(IntStream numbers){
-
-        IntSummaryStatistics intStats = 
-                numbers.summaryStatistics(); // terminal op.
-
-        int min = intStats.getMin();
-        System.out.println(min);// 5 (2147483647 if nothing in stream)
-        int max = intStats.getMax();
-        System.out.println(max);// 20 (-2147483648 if nothing in stream)
-        double avg = intStats.getAverage();
-        System.out.println(avg);// 12.5 (0.0 if nothing in stream)
-        long count = intStats.getCount();
-        System.out.println(count);// 4 (0 if nothing in stream)
-        long sum = intStats.getSum();
-        System.out.println(sum);// 50 (0 if nothing in stream)
-
+        IntSummaryStatistics intStats =
+                numbers.summaryStatistics();        // terminal operation
+        System.out.println(intStats.getMin());      // 5 (2147483647 if nothing in stream)
+        System.out.println(intStats.getMax());      // 20 (-2147483648 if nothing in stream)
+        System.out.println(intStats.getAverage());  // 12.5 (0.0 if nothing in stream)
+        System.out.println(intStats.getCount());    // 4 (0 if nothing in stream)
+        System.out.println(intStats.getSum());      // 50 (0 if nothing in stream)
     }
     
     public static void maxMinAverage(){
@@ -52,78 +80,6 @@ public class PrimitiveStreams {
         System.out.println(average.orElseGet(() -> Math.random()));// 20.0
     }
     
-    public static void mappingPrimitiveStreams(){
-        
-        // IntStream to Stream<T>
-        Stream<String> streamAges = IntStream.of(1, 2, 3)
-                // mapToObj(IntFunction<R>)
-                //    IntFunction is a functional interface:
-                //       R apply(int value)
-                .mapToObj(n -> "Number:"+ n);
-        // forEach is a terminal operation which closes the stream
-        // forEach(Consumer)  - Consumer is a functional interface:
-        //    void accept(T t)
-        streamAges.forEach(System.out::println);// Number:1, Number:2, Number:3
-
-        // IntStream to DoubleStream
-        DoubleStream dblStream = IntStream.of(1, 2, 3) // must open stream again as it is closed!
-                // mapToDouble(IntToDoubleFunction)
-                //   IntToDoubleFunction is a functional interface:
-                //      double applyAsDouble​(int value)
-                .mapToDouble(n -> (double)n); // cast NOT necessary
-        dblStream.forEach(System.out::println); // 1.0, 2.0, 3.0
-        
-        // IntStream to IntStream
-        IntStream.of(1, 2, 3)   
-                //  map(IntUnaryOperator)
-                //    IntUnaryOperator is a functional interface:
-                //        int applyAsInt(int)
-                .map(n -> n*2)
-                .forEach(System.out::println);// 2, 4, 6
-
-        // IntStream to LongStream
-        IntStream.of(1, 2, 3)   // must open stream again as 'intStream' is closed!
-                // mapToLong(IntToLongFunction)
-                //   IntToLongFunction is a functional interface:
-                //      long applyAsLong​(int value)
-                .mapToLong(n -> (long)n) // cast NOT necessary
-                .forEach(System.out::println); // 1, 2, 3
-
-    }
-    public static void mappingObjectStreams(){
-        // Stream<T> to Stream<T>
-        Stream.of("ash", "beech", "sycamore")
-                // map(Function)
-                //    Function<T, R> => Function<String, String>
-                //       String apply(String s)
-               .map(tree -> tree.toUpperCase())
-               .forEach(System.out::println);// ASH, BEECH, SYCAMORE
-
-        // Stream<T> to DoubleStream
-        DoubleStream dblStream = Stream.of("ash", "beech", "sycamore")
-                // mapToDouble(ToDoubleFunction)
-                //   ToDoubleFunction is a functional interface:
-                //      double applyAsDouble​(T value)
-                .mapToDouble(tree -> tree.length()); // upcast in background
-        dblStream.forEach(System.out::println); // 3.0, 5.0, 8.0
-
-        // Stream<T> to IntStream
-        IntStream intStream    = Stream.of("ash", "beech", "sycamore")
-                // mapToInt(ToIntFunction)
-                //   ToIntFunction is a functional interface:
-                //      int applyAsInt​(T value) => int applyAsInt​(String tree)
-                .mapToInt(tree -> tree.length());
-        intStream.forEach(System.out::println); // 3, 5, 8
-        
-        // Stream<T> to LongStream
-        LongStream longStream = Stream.of("ash", "beech", "sycamore")
-                // mapToLong(ToLongFunction)
-                //   ToLongFunction is a functional interface:
-                //      long applyAsLong​(T value)
-                .mapToLong(tree -> tree.length()); // upcast in background
-        longStream.forEach(System.out::println); // 3, 5, 8
-
-    }
     public static void ranges(){
         
         IntStream.range(1, 5) // startInclusive, endExclusive
@@ -135,7 +91,31 @@ public class PrimitiveStreams {
         
     }
     public static void usingSum(){
-        
+
+        IntStream is = IntStream.of(4, 2, 3);
+        System.out.println(is.sum());// 9
+
+        // 1. Using Stream<T> and reduce(identity, accumulator)
+        Stream<Integer> numbers = Stream.of(1,2,3);
+        System.out.println(numbers.reduce(0, (n1, n2) -> n1 + n2));// 6
+
+        // 2. Using IntStream and sum()
+        // IntStream mapToInt(ToIntFunction)
+        //   ToIntFunction is a functional interface:
+        //     int applyAsInt(T value);
+        Stream<Integer> sInteger = Stream.of(1,2,3);
+        IntStream intS           = sInteger.mapToInt( n -> n);// unboxed
+        System.out.println(intS.sum());// 6
+
+        int sum = Stream.of(1,2,3)
+                .mapToInt(n -> n)
+                .sum();
+        System.out.println(sum);
+
+    }
+    
+}
+/* save
         // 1. Using Stream<T> and reduce(identity, accumulator)
         Stream<Integer> numbers = Stream.of(1,2,3);
         // Integer reduce(Integer identity, BinaryOperator accumulator)
@@ -145,9 +125,9 @@ public class PrimitiveStreams {
         //      n1 +  n2
         //      0  +  1  == 1  (n1 now becomes 1)
         //      1  +  2  == 3  (n1 now becomes 3)
-        //      3  +  3  == 6  
+        //      3  +  3  == 6
         System.out.println(numbers.reduce(0, (n1, n2) -> n1 + n2));// 6
-    
+
         // 2. Using IntStream and sum()
         // IntStream mapToInt(ToIntFunction)
         //   ToIntFunction is a functional interface:
@@ -157,6 +137,25 @@ public class PrimitiveStreams {
         int total = intS.sum();
         System.out.println(total);//6
 
+ */
+/*
+save
+    public static void stats(IntStream numbers){
+
+        IntSummaryStatistics intStats =
+                numbers.summaryStatistics(); // terminal op.
+
+        int min = intStats.getMin();
+        System.out.println(min);// 5 (2147483647 if nothing in stream)
+        int max = intStats.getMax();
+        System.out.println(max);// 20 (-2147483648 if nothing in stream)
+        double avg = intStats.getAverage();
+        System.out.println(avg);// 12.5 (0.0 if nothing in stream)
+        long count = intStats.getCount();
+        System.out.println(count);// 4 (0 if nothing in stream)
+        long sum = intStats.getSum();
+        System.out.println(sum);// 50 (0 if nothing in stream)
+
     }
-    
-}
+
+ */
