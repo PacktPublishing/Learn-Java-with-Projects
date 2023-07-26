@@ -11,9 +11,8 @@ import java.util.stream.Stream;
 
 public class CreatingStreams {
     public static void main(String[] args) {
-        fromArray();
+//        fromArray();
 //        fromCollection();
-//        creatingPrimitiveStreams();
 //        // finite streams
 //        // using Stream.of(varargs)
 //        Stream<String> animals = Stream.of("cat", "dog", "sheep");
@@ -34,24 +33,6 @@ public class CreatingStreams {
 //        Stream<Integer> oddNumbersJava9 = Stream.iterate(1,           // seed
 //                                                         n -> n < 100,// Predicate to say when done
 //                                                         n -> n+2);   // next number 
-    }
-    public static void creatingPrimitiveStreams(){
-        int[] ia    = {1,2,3};
-        double[] da = {1.1, 2.2, 3.3};
-        long[] la   = {1L, 2L, 3L};
-        
-        IntStream iStream1      = Arrays.stream(ia);
-        DoubleStream dStream1   = Arrays.stream(da);
-        LongStream lStream1     = Arrays.stream(la);
-        System.out.println(iStream1.count() + ", " + 
-                dStream1.count() + ", " + lStream1.count());// 3, 3, 3
-        
-        IntStream iStream2       = IntStream.of(1, 2, 3);
-        DoubleStream dStream2    = DoubleStream.of(1.1, 2.2, 3.3);
-        LongStream lStream2      = LongStream.of(1L, 2L, 3L);
-        System.out.println(iStream2.count() + ", " + 
-                dStream2.count() + ", " + lStream2.count());// 3, 3, 3
-        
     }
     public static void fromCollection(){
         

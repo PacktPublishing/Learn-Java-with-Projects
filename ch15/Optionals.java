@@ -2,15 +2,16 @@ package ch15;
 
 import java.util.Optional;
 import java.util.OptionalDouble;
+import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
 public class Optionals {
     
     public static void main(String[] args) {
-//        doOptionalPrimitiveAverage();
+        doOptionalPrimitiveAverage();
 //        doOptionalAverage();
 //        createOptionals();
-        doOptionalNull();
+//        doOptionalNull();
     }
     public static void createOptionals(){
         Optional opt1 = Optional.empty();
@@ -32,15 +33,18 @@ public class Optionals {
     }
     
     public static void doOptionalPrimitiveAverage(){
-        OptionalDouble optAvg = IntStream.rangeClosed(1, 10)
-                                    .average();
-        // DoubleConsumer - functional interface; functional method is:
-        //    void accept(double value)
-        optAvg.ifPresent((d) -> System.out.println(d));// 5.5
+        OptionalDouble optAvg = IntStream.rangeClosed(1, 10).average();
+        optAvg.ifPresent(d -> System.out.println(d));// 5.5
         System.out.println(optAvg.getAsDouble());// 5.5
-        // DoubleSupplier - functional interface; functional method is:
-        //    double getAsDouble()
-        System.out.println(optAvg.orElseGet(() -> Double.NaN));// 5.5
+        double dblAvg = optAvg.orElseGet(() -> Double.NaN);
+        System.out.println(dblAvg);// 5.5
+
+        OptionalInt optInt = OptionalInt.of(35);
+        int age = optInt.orElseGet(() -> 0);
+        System.out.println(age);// 35
+        System.out.println(optInt.getAsInt());// 35
+
+
     }
     
     public static void doOptionalNull(){
@@ -80,3 +84,18 @@ public class Optionals {
     }
 
 }
+/*
+save
+    public static void doOptionalPrimitiveAverage(){
+        OptionalDouble optAvg = IntStream.rangeClosed(1, 10)
+                                    .average();
+        // DoubleConsumer - functional interface; functional method is:
+        //    void accept(double value)
+        optAvg.ifPresent((d) -> System.out.println(d));// 5.5
+        System.out.println(optAvg.getAsDouble());// 5.5
+        // DoubleSupplier - functional interface; functional method is:
+        //    double getAsDouble()
+        System.out.println(optAvg.orElseGet(() -> Double.NaN));// 5.5
+    }
+
+ */
