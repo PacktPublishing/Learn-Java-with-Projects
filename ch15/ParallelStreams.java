@@ -3,6 +3,7 @@ package ch15;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,7 +20,8 @@ public class ParallelStreams {
 //        parallelReduction1();
 //        parallelReduction2();
 //        associativity();
-        concurrentCollection();
+//        concurrentCollection();
+        serialStream();
     }
     public static void concurrentCollection(){
         var names = Stream.of("John","Mary","Mike", "Paula")
@@ -57,7 +59,7 @@ public class ParallelStreams {
     public static void parallelReduction1(){
         int result = Stream.of(1,2,3,4,5)
                     .parallel()
-                .reduce(0,
+                    .reduce(0,
                         (n1, n2) -> { // accumulator
                             System.out.print(n1 + ", " + n2 + "\n");
                             return n1 - n2;
@@ -119,7 +121,27 @@ public class ParallelStreams {
                 .parallel() 
                 .forEach(System.out::print);// bca
     }
+    public static void serialStream(){
+        int result = Stream.of(1,2,3,4,5)
+                .reduce(0,
+                        (n1, n2) -> {
+                            int sub = n1-n2;
+                            System.out.println(n1 + ", "+n2+ ", "+sub);
+                            return n1 - n2;
+                        });
+        System.out.println(result);
+    }
 }
+
+        /*
+         0, 1, -1
+        -1, 2, -3
+        -3, 3, -6
+        -6, 4, -10
+        -10, 5, -15
+        -15
+         */
+
 
 //save
 //package ch15;
