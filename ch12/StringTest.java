@@ -1,6 +1,29 @@
 package ch12;
 
 public class StringTest {
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static void howManyObjectsString(){
+        String s = "The ";
+        s += "quick ";           // s = s + "quick "
+        System.out.println(s);   // The quick
+        s.concat("brown fox");// lost!
+        System.out.println(s);   // The quick
+        s = s.concat("brown fox");
+        System.out.println(s);   // The quick brown fox
+    }
+
     public static void main(String[] args) {
 //        String s1 = "abc";                    // string pool
 //        String s2 = "abc";                    // string pool
@@ -13,19 +36,27 @@ public class StringTest {
 //        System.out.println(s1 == s3);         // true
 //        howManyObjectsString();
 //        howManyObjectsSB();
-//        stringAPI();
-        stringBuilderAPI();
+        stringAPI();
+//        stringBuilderAPI();
     }
     public static void stringBuilderAPI(){
-
+        StringBuilder abc = new StringBuilder("abc");
+        StringBuilder def = new StringBuilder("def");
+        StringBuilder da  = new StringBuilder("da");
+        StringBuilder xyz = new StringBuilder("xyz");
+        System.out.println(abc.compareTo(def));   // -3
+        System.out.println(def.compareTo(da));    // 4
+        System.out.println(xyz.compareTo(xyz));   // 0
     }
     public static void stringAPI(){
-//        int res = "abc".compareTo("def");   // a-d = -3
-//        System.out.println(res);
-//        res = "def".compareTo("da");        // e-a = 4
-//        System.out.println(res);
-//        res = "xyz".compareTo("xyz");       // 0
-//        System.out.println(res);
+        int res = "ace".compareTo("bat");   // -1
+        System.out.println(res);
+        res = "and".compareTo("at");        // -6
+        System.out.println(res);
+        res = "bat".compareTo("battle");    // -3
+        System.out.println(res);
+        res = "xyz".compareTo("xyz");       // 0
+        System.out.println(res);
 
 //        System.out.println("abc".endsWith("bc")); // true
 //        System.out.println("abc".endsWith("BC")); // false
@@ -39,15 +70,6 @@ public class StringTest {
 //        System.out.println("Sean Kennedy".substring(3, 8)); // n Ken
         System.out.println("  lots of  spaces   here    ".trim() + "x");
 
-    }
-    public static void howManyObjectsString(){
-        String s = "The ";
-        s += "quick ";           // s = s + "quick "
-        System.out.println(s);   // The quick
-        s.concat("brown fox");// lost!
-        System.out.println(s);   // The quick
-        s = s.concat("brown fox");
-        System.out.println(s);   // The quick brown fox
     }
     public static void howManyObjectsSB(){
         StringBuilder sb = new StringBuilder("The ");
