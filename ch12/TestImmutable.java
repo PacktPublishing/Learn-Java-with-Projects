@@ -40,11 +40,11 @@ final class Farm { // cannot subclass this class and all methods are final
 }
 
  //1. The next line generates the error:
- //   - "compiler error: cannot inherit from Department" as Department is final
-//class SportsDepartment extends Department{ 
-//    SportsDepartment(){
+ //   - "compiler error: cannot inherit from Farm" as Farm is final
+//class DairyFarm extends Farm{
+//    DairyFarm(){
 //        // 2. The next line generates the error:
-//        //    - Department constructor is not visible
+//        //    - Farm constructor is not visible
 //        super("", "", 2, new ArrayList<String>());
 //    }
 //}
