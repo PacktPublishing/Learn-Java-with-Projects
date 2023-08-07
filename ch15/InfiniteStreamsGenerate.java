@@ -15,35 +15,34 @@ public class InfiniteStreamsGenerate {
 
     Again, my apologies for the inconvenience - Seán.
 
+    Please see below for start of generate() method.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      \                                               /
+       \                                             /
+        \                                           /
+         \                                         /
+          \                                       /
+           \                                     /
+            \                                   /
+             \                                 /
+              \                               /
+               \                             /
+                \                           /
+                 \                         /
+                  \                       /
+                   \                     /
+                    \                   /
+                     \                 /
+                      \               /
+                       \             /
+                        \           /
+                         \         /
+                          \       /
+                           \     /
+                            \   /
+                             \ /
+                              .
      */
     public static void generate(){
         // infinite stream of random unordered numbers
