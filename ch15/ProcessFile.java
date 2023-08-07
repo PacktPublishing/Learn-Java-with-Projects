@@ -24,7 +24,7 @@ public class ProcessFile {
         // Relative path built from: System.getProperty("user.dir")
 //        System.out.println(System.getProperty("user.dir"));
         List<Cat> cats = loadCats("out\\production\\" +
-                "JavaFromBeginnerToProfessional\\ch15\\cats.txt");
+                "Learn-Java-with-Projects\\ch15\\cats.txt");
         cats.forEach(System.out::println);// just print the Cat
     }
     public static List<Cat> loadCats(String filename){
