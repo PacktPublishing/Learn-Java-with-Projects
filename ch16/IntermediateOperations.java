@@ -68,7 +68,7 @@ public class IntermediateOperations {
                 .forEach(System.out::print);
     
     }
-    public static void doSortedFromBook() {
+    public static void doSortedExtra() {
         
         // Stream<T> sorted()
         // Stream<T> sorted(Comparator<T> comparator)
