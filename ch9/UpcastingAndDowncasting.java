@@ -13,9 +13,9 @@ public class UpcastingAndDowncasting {
 
         // Let us try and call the Tractor-specific method 'drive()'
 //        machine.drive(); // compiler error
-//        (Tractor)machine.drive(); // possible ClassCastException
-        if(machine instanceof Tractor){
-            ((Tractor)machine).drive(); // safe
+//        ((Tractor)machine).drive(); // possible ClassCastException
+        if(machine instanceof Tractor t){
+            t.drive(); // safe
         }
     }
     public static void main(String[] args) {
