@@ -9,7 +9,7 @@ public class ConditionLogic {
         //danglingElse();
         //switchStmt();
         //switchExamples();
-        switchExpressions();
+        //switchExpressions();
     }
     public static void switchExpressions(){
         // switch statement (nothing returned)
@@ -33,16 +33,19 @@ public class ConditionLogic {
                 break;
             default:
                 System.out.println("Unrecognized name: "+name);
+                nLetters = -1;
                 break;
         }
         System.out.println(nLetters);
-
         // switch expression for the above
         nLetters = switch(name){
             case "Jane", "Sean", "Alan", "Paul" -> 4;
             case "Janet", "Susan" -> 5;
             case "Maaike", "Alison" , "Miriam" -> 6;
-            default -> throw new IllegalStateException("Unrecognized name: "+name);
+            default -> {
+                System.out.println("Unrecognized name: "+name);
+                yield -1; // 'nLetters' initialized to -1
+            }
         };
         System.out.println(nLetters);
 
@@ -51,24 +54,26 @@ public class ConditionLogic {
             case "Jane", "Sean", "Alan", "Paul" -> 4;
             case "Janet", "Susan" -> 5;
             case "Maaike", "Alison" , "Miriam" -> 6;
-            default -> throw new IllegalStateException("Unrecognized name: "+name);
+            default -> "Unrecognized name: "+name;
         });
 
-        // switch expressions with code blocks
-        nLetters = switch(name){
+        nLetters = switch(name){   // switch expressions with code blocks
             case "Jane", "Sean", "Alan", "Paul" -> {
-                System.out.println("Name is: "+name);
+                System.out.println("There are 4 letters in: " + name);
                 yield 4;
             }
             case "Janet", "Susan" -> {
-                System.out.println("Name is: "+name);
+                System.out.println("There are 5 letters in: "+name);
                 yield 5;
             }
             case "Maaike", "Alison" , "Miriam" -> {
-                System.out.println("Name is: "+name);
+                System.out.println("There are 6 letters in: "+name);
                 yield 6;
             }
-            default -> throw new IllegalStateException("Unrecognized name: "+name);
+            default -> {
+                System.out.println("Unrecognized name: "+name);
+                yield -1;
+            }
         };
         System.out.println(nLetters);
 
@@ -78,7 +83,10 @@ public class ConditionLogic {
             case "Jane", "Sean", "Alan", "Paul" -> nLetters = 4;
             case "Janet", "Susan" -> nLetters = 5;
             case "Maaike", "Alison" , "Miriam" -> nLetters = 6;
-            default -> throw new IllegalStateException("Unrecognized name: "+name);
+            default -> {
+                System.out.println("Unrecognized name: "+name);
+                nLetters = -1;
+            }
         }
         System.out.println(nLetters);
 
@@ -87,21 +95,21 @@ public class ConditionLogic {
             case "Jane":
             case "Sean":
             case "Alan":
-            case "Paul": {
-                System.out.println("Name is: " + name);
+            case "Paul":
+                System.out.println("There are 4 letters in: " + name);
                 yield 4;
-            }
             case "Janet":
             case "Susan":
-                System.out.println("Name is: "+name);
+                System.out.println("There are 5 letters in: "+name);
                 yield 5;
             case "Maaike":
             case "Alison":
             case "Miriam":
-                System.out.println("Name is: "+name);
+                System.out.println("There are 6 letters in: "+name);
                 yield 6;
             default:
-                throw new IllegalStateException("Unrecognized name: "+name);
+                System.out.println("Unrecognized name: "+name);
+                yield -1;
         };
         System.out.println(nLetters);
 
@@ -110,7 +118,10 @@ public class ConditionLogic {
         // no case labels allowed
         switch("abc"){
         }
+        int x=2;
+        switch(x) {
 
+        }
 
     /*    Scanner sc = new Scanner(System.in);
         System.out.print("Enter a sport --> ");
@@ -162,10 +173,10 @@ public class ConditionLogic {
         }
     }
     public static void switchStmt(){
-        final int JAN=1;final int FEB=2;final int MAR=3; // define constants
-        final int APR=4;final int MAY=5;final int JUN=6;
-        final int JUL=7;final int AUG=8;final int SEP=9;
-        final int OCT=10;final int NOV=11;final int DEC=12;
+        final int JAN=1;  final int FEB=2;  final int MAR=3; // define constants
+        final int APR=4;  final int MAY=5;  final int JUN=6;
+        final int JUL=7;  final int AUG=8;  final int SEP=9;
+        final int OCT=10; final int NOV=11; final int DEC=12;
 
         Scanner sc = new Scanner(System.in);    // import java.util.Scanner;
         System.out.print("Enter month --> ");
@@ -248,7 +259,7 @@ public class ConditionLogic {
         final int OCT=10;final int NOV=11;final int DEC=12;
 
         Scanner sc = new Scanner(System.in);    // import java.util.Scanner;
-        System.out.print("Enter month --> ");
+        System.out.print("Enter month (1..12) --> ");
         int month = sc.nextInt();
 
         int numDays=0;
@@ -275,8 +286,8 @@ public class ConditionLogic {
     }
 
     public static void ifStmt(){
-/*
-        int x=4, y=5;
+
+        int x=5, y=4;
         if(x > y)
             System.out.println(x + " > "+y);
         if(x < y)
@@ -285,7 +296,7 @@ public class ConditionLogic {
             String s = x + " == "+y;
             System.out.println(s);
         }
-*/
+
 /*
         int x=4, y=5;
         if(x > y) {
@@ -297,7 +308,7 @@ public class ConditionLogic {
         }
         System.out.println("Here");
 */
-        int x=4, y=4;
+/*        int x=4, y=4;
         if(x > y) {
             System.out.println(x + " > " + y);
         } else if(x < y) {
@@ -306,6 +317,24 @@ public class ConditionLogic {
             System.out.println(x + " == " + y);
         }
         System.out.println("Here");
-
+*/
     }
 }
+
+/* save
+        nLetters = switch(name){
+            case "Jane", "Sean", "Alan", "Paul" -> 4;
+            case "Janet", "Susan" -> 5;
+            case "Maaike", "Alison" , "Miriam" -> 6;
+            default -> throw new IllegalStateException("Unrecognized name: "+name);
+        };
+        System.out.println(nLetters);
+
+        System.out.println(switch(name){
+            case "Jane", "Sean", "Alan", "Paul" -> 4;
+            case "Janet", "Susan" -> 5;
+            case "Maaike", "Alison" , "Miriam" -> 6;
+            default -> throw new IllegalStateException("Unrecognized name: "+name);
+        });
+
+ */
