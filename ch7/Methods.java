@@ -2,6 +2,51 @@ package ch7;
 
 public class Methods {
     public static void main(String[] args) {
+        m1();
+        m1(1);
+        m1(1, 2);
+        m1(1, 2, 3);
+    }
+    public static void m1(String s, int... args){}
+    public static void m1(int... args, String s){}
+    public static void m1(int[] args){}
+}
+/*
+public class Methods {
+    public static void main(String[] args) {
+        m1();
+        m1(1);
+        m1(1, 2);
+        m1(1, 2, 3);
+    }
+    public static void m1(int... args){ // varargs
+        int sum = 0;
+        for(int i:args){
+            sum += i;
+        }
+        System.out.println(sum);
+    }
+}
+
+ */
+/*
+public class Methods {
+    public static void main(String[] args) {
+        System.out.println("main: before call to simpleExample()");
+        simpleExample(); // method call
+        System.out.println("main: after call to simpleExample()");
+    }
+    public static void simpleExample(){ // method definition
+        System.out.println("\tExecuting simpleExample() method...");
+    }
+}
+*/
+
+/*
+package ch7;
+
+public class Methods {
+    public static void main(String[] args) {
         int x = 19;         // primitive
         int[] arr = {1, 2}; // array
         callByValue(x, arr);
@@ -16,30 +61,32 @@ public class Methods {
         return x;
     }
 }
-
+*/
 /*
 public class Methods {
     public static void main(String[] args) {
         m1();
         m1("A");
+        System.out.println();
         m1("A", "B");
+        System.out.println();
         m1("A", "B", "C");
     }
-    public static void m1(int n, String... args){}
-    public static void m1(String... args, int n){}
-    public static void m1(String[] args){} // this is not varargs
+//    public static void m1(int n, String... args){}
+//    public static void m1(String... args, int n){}
+//    public static void m1(String[] args){} // this is not varargs
 
-//    public static void m1(String... args){ // varargs
-//        for(int i=0; i<args.length; i++){
-//            System.out.println(args[i]);
-//        }
-//        for(String s:args){
-//            System.out.println(s);
-//        }
-//    }
+    public static void m1(String... args){ // varargs
+        for(int i=0; i<args.length; i++){
+            System.out.println(args[i]);
+        }
+        for(String s:args){
+            System.out.println(s);
+        }
+    }
 }
+*/
 
- */
 /*
 public class Methods {
     public static void main(String[] args) {
@@ -77,6 +124,7 @@ public class Methods {
 /*
 public class Methods {
     public static void main(String[] args) {
+        performCalc(10, 2, "+");
         int result = performCalc(10, 2, "+"); // method call; passing down "arguments"
         System.out.println(result); // 12
         System.out.println(performCalc(10, 2, "-")); // 8
@@ -99,8 +147,8 @@ public class Methods {
         return result;
     }
 }
+*/
 
- */
 /*
     public static void main(String[] args) {
         // method call; passing down "arguments"
