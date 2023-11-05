@@ -2,15 +2,44 @@ package ch7;
 
 public class Methods {
     public static void main(String[] args) {
-        m1();
-        m1(1);
-        m1(1, 2);
-        m1(1, 2, 3);
+        int result = performCalc(10, 2, "+"); // method call; passing down "arguments"
+        System.out.println(result); // 12
+        System.out.println(performCalc(10, 2, "-")); // 8
+        System.out.println(performCalc(10, 2, "*")); // 20
+        System.out.println(performCalc(10, 2, "/")); // 5
+        performCalc(10, 2, "%");// return value ignored
+        System.out.println(performCalc(10, 2, "&")); // Unrecognized operation: &, -1
+    }
+    public static int performCalc(int x, int y, String operation){  // "parameters"
+        int result = switch(operation){
+            case "+" -> x + y;
+            case "-" -> x - y;
+            case "*" -> x * y;
+            case "/" -> x / y;
+            case "%" -> x % y;
+            default -> {
+                System.out.println("Unrecognized operation: "+operation);
+                yield -1; // error
+            }
+        };
+        return result;
+    }
+}
+
+/*
+public class Methods {
+    public static void main(String[] args) {
+//        m1();
+//        m1(1);
+//        m1(1, 2);
+//        m1(1, 2, 3);
     }
     public static void m1(String s, int... args){}
-    public static void m1(int... args, String s){}
+    //public static void m1(int... args, String s){}
     public static void m1(int[] args){}
 }
+*/
+
 /*
 public class Methods {
     public static void main(String[] args) {
@@ -131,7 +160,7 @@ public class Methods {
         System.out.println(performCalc(10, 2, "*")); // 20
         System.out.println(performCalc(10, 2, "/")); // 5
         performCalc(10, 2, "%");// return value ignored
-        System.out.println(performCalc(10, 2, "&")); // IllegalArgumentException
+        System.out.println(performCalc(10, 2, "&"));
     }
     public static int performCalc(int x, int y, String operation){  // method "parameters"
 
