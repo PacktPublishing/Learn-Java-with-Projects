@@ -1,4 +1,4 @@
-package animals;
+package ch8.animals;
 
 public class Dog {
     private String dogName;
