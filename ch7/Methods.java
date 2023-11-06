@@ -2,6 +2,23 @@ package ch7;
 
 public class Methods {
     public static void main(String[] args) {
+        m1();                // 0
+        m1(1);         // 1
+        m1(1, 2);      // 3
+        m1(1, 2, 3);   // 6
+    }
+    public static void m1(int... args){ // varargs
+        int sum = 0;
+        for(int i:args){
+            sum += i;
+        }
+        System.out.println(sum);
+    }
+}
+
+/*
+public class Methods {
+    public static void main(String[] args) {
         int result = performCalc(10, 2, "+"); // method call; passing down "arguments"
         System.out.println(result); // 12
         System.out.println(performCalc(10, 2, "-")); // 8
@@ -25,14 +42,14 @@ public class Methods {
         return result;
     }
 }
-
+*/
 /*
 public class Methods {
     public static void main(String[] args) {
-//        m1();
-//        m1(1);
-//        m1(1, 2);
-//        m1(1, 2, 3);
+//        m1();         // 0
+//        m1(1);        // 1
+//        m1(1, 2);     // 3
+//        m1(1, 2, 3);  // 6
     }
     public static void m1(String s, int... args){}
     //public static void m1(int... args, String s){}
@@ -43,10 +60,10 @@ public class Methods {
 /*
 public class Methods {
     public static void main(String[] args) {
-        m1();
-        m1(1);
-        m1(1, 2);
-        m1(1, 2, 3);
+        m1();           // 0
+        m1(1);          // 1
+        m1(1, 2);       // 3
+        m1(1, 2, 3);    // 6
     }
     public static void m1(int... args){ // varargs
         int sum = 0;
