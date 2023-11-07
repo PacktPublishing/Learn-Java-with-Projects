@@ -2,55 +2,55 @@ package ch9;
 
 class Parent{
     // instance initialization block
-    { System.out.println("Parent instance init block 1"); }
+    { System.out.println("6. Parent instance init block 1"); }
     // static initialization block
-    static {System.out.println("Parent static init block 1");}
+    static {System.out.println("2. Parent static init block 1");}
     Parent(){
-        System.out.println("Parent constructor");
+        System.out.println("8. Parent constructor");
     }
-    { System.out.println("Parent instance init block 2"); }
-    static {System.out.println("Parent static init block 2");}
+    { System.out.println("7. Parent instance init block 2"); }
+    static {System.out.println("3. Parent static init block 2");}
 }
 class Child extends Parent{
-    { System.out.println("Child instance init block 1"); }
-    static {System.out.println("Child static init block 1");}
+    { System.out.println("9. Child instance init block 1"); }
+    static {System.out.println("4. Child static init block 1");}
     Child(){
-        System.out.println("Child constructor");
+        System.out.println("11. Child constructor");
     }
-    { System.out.println("Child instance init block 2"); }
-    static {System.out.println("Child static init block 2\n");}
+    { System.out.println("10. Child instance init block 2"); }
+    static {System.out.println("5. Child static init block 2\n");}
 }
 public class InitializationBlocks {
-    static {System.out.println("InitializationBlocks static init block");}
+    static {System.out.println("1. InitializationBlocks static init block");}
     { System.out.println("InitializationBlocks instance init block"); }
     public static void main(String[] args) {
-        System.out.println("Creating first Child object...");
+        System.out.println("---> Creating first Child object...");
         new Child();
-        System.out.println("\nCreating second Child object...");
+        System.out.println("\n--->Creating second Child object...");
         new Child();
     }
 }
 
 /*
-InitializationBlocks static init block
-Creating first Child object...
-Parent static init block 1
-Parent static init block 2
-Child static init block 1
-Child static init block 2
+1. InitializationBlocks static init block
+---> Creating first Child object...
+2. Parent static init block 1
+3. Parent static init block 2
+4. Child static init block 1
+5. Child static init block 2
 
-Parent instance init block 1
-Parent instance init block 2
-Parent constructor
-Child instance init block 1
-Child instance init block 2
-Child constructor
+6. Parent instance init block 1
+7. Parent instance init block 2
+8. Parent constructor
+9. Child instance init block 1
+10. Child instance init block 2
+11. Child constructor
 
-Creating second Child object...
-Parent instance init block 1
-Parent instance init block 2
-Parent constructor
-Child instance init block 1
-Child instance init block 2
-Child constructor
+--->Creating second Child object...
+6. Parent instance init block 1
+7. Parent instance init block 2
+8. Parent constructor
+9. Child instance init block 1
+10. Child instance init block 2
+11. Child constructor
  */
