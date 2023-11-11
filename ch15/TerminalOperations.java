@@ -10,12 +10,12 @@ import java.util.stream.Stream;
 
 public class TerminalOperations {
     public static void main(String[] args) {
-//        doMinAndMax();
-//        doReduce1();
-//        doReduce2();
-//        doCount();
-//        doMatches();
-//        doCollect1();
+        doMinAndMax();
+        doReduce1();
+        doReduce2();
+        doCount();
+        doMatches();
+        doCollect1();
     }
     public static void doCollect1(){
         
@@ -95,16 +95,16 @@ public class TerminalOperations {
                        .reduce(1, (n1, n2) -> n1 * n2);
         System.out.println(product);// 24
 
-
-
     }
 
 
 
+
+
+
+
+
     public static void doForEach(){
-
-
-
 
         // void forEach(Consumer)
         // As there is no return value, forEach() is not a reduction.
@@ -153,9 +153,9 @@ public class TerminalOperations {
                         .count();
         System.out.println(count); // 2
 
-//        long l = Stream.empty().count();
-//        System.out.println(l); // 0
     }
+
+
 
 
     public static void doMinAndMax(){ 
@@ -177,3 +177,6 @@ public class TerminalOperations {
     }
 
 }
+
+//        long l = Stream.empty().count();
+//        System.out.println(l); // 0
