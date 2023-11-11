@@ -17,20 +17,20 @@ class Car{
 }
 public class CollectorsExamples {
     public static void main(String[] args) {
-//        doGetAsTreeSet();
-//        doGetAsArbitraryList();
-//        doAveragingInt();
-//        collectToMap();
-//        collectToMapWithException();
-//        collectToMapAndMerge();
-//        collectToTreeMap();
-//        groupByMapToList();
-//        groupByMapToSet();
-//        groupByTreeMapToList();
+        collectToSet();
+        collectToList();
+        doAveragingInt();
+        collectToMap();
+        collectToMapWithException();
+        collectToMapAndMerge();
+        collectToTreeMap();
+        groupByMapToList();
+        groupByMapToSet();
+        groupByTreeMapToList();
         partitioningToList();
-//        partitioningToSet();
+        partitioningToSet();
     }
-    public static void doGetAsTreeSet(){
+    public static void collectToSet(){
 
         var cars = new ArrayList<Car>();
         cars.add(new Car("Tesla", 2021));
@@ -42,7 +42,7 @@ public class CollectorsExamples {
         System.out.println(treeSet);// [Audi, Ford, Tesla]
 
     }
-    public static void doGetAsArbitraryList(){
+    public static void collectToList(){
 
         var cars = new ArrayList<Car>();
         cars.add(new Car("Tesla", 2021));
@@ -90,7 +90,6 @@ public class CollectorsExamples {
 
     }
     public static void partitioningToList(){
-        
         Stream<String> names = Stream.of("Thomas", "Teresa",
                                                 "Mike", "Alan", "Peter");
         Map<Boolean, List<String>> map =
@@ -102,6 +101,7 @@ public class CollectorsExamples {
                                 // true=[Thomas, Teresa]}
 
     }
+
     public static void groupByTreeMapToList(){
 
         Stream<String> names = Stream.of("Martin", "Peter", "Tom", "Tom", "Ann");
