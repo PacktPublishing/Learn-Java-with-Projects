@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 
 public class CreatingStreams {
     public static void main(String[] args) {
-//        fromArray();
-//        fromCollection();
+        fromArray();
+        fromCollection();
 //        // finite streams
 //        // using Stream.of(varargs)
 //        Stream<String> animals = Stream.of("cat", "dog", "sheep");
@@ -34,8 +34,23 @@ public class CreatingStreams {
 //                                                         n -> n < 100,// Predicate to say when done
 //                                                         n -> n+2);   // next number 
     }
+    public static void fromArray(){
+
+        Double[] numbers = {1.1, 2.2, 3.3};
+        Stream<Double> stream1 = Arrays.stream(numbers);
+        long n = stream1.count();
+        System.out.println("Number of elements: "+n+ " "+numbers.length);// 3
+
+        // Re-creating the stream using Stream.of()
+        //   static <T> Stream<T> of(T... values)
+        Stream<Double> stream2 = Stream.of(numbers);
+        System.out.println("Number of elements: "+stream2.count()); // 3
+
+        Stream<String> stream3 = Stream.of("Austria", "New Zealand");
+        System.out.println("Number of elements: "+stream3.count()); // 2
+    }
+
     public static void fromCollection(){
-        
         List<String> animalList = Arrays.asList("cat", "dog", "sheep");
         // using stream() which is a default method in Collection interface
         Stream<String> streamAnimals = animalList.stream();
@@ -53,48 +68,5 @@ public class CreatingStreams {
                     .entrySet() // get a Set (i.e. Collection) view of the Map
                     .stream()   // stream() is a default method in Collection  
                     .count());  // 3
-
-        
     }
-    public static void fromArray(){
-        
-        Double[] numbers = {1.1, 2.2, 3.3};
-        Stream<Double> stream1 = Arrays.stream(numbers);
-        long n = stream1.count();
-        System.out.println("Number of elements: "+n);// 3
-        
-        // Re-creating the stream using Stream.of()
-        //   static <T> Stream<T> of(T... values)
-        Stream<Double> stream2 = Stream.of(numbers);
-        System.out.println("Number of elements: "+stream2.count()); // 3
-        
-        Stream<String> stream3 = Stream.of("Austria", "New Zealand");
-        System.out.println("Number of elements: "+stream3.count()); // 2
-    }  
 }
-/* save
-    public static void fromArray(){
-
-        Double[] numbers = {1.1, 2.2, 3.3};
-        // Arrays.stream() creates a stream from the array 'numbers'.
-        // The array is considered the source of the stream and while the
-        // data is flowing through the stream, we have an opportunity to
-        // operate on the data.
-        Stream<Double> stream1 = Arrays.stream(numbers);
-
-        // lets perform an operation on the data
-        // note that count() is a "terminal operation" - this means that
-        // you cannot perform any more operations on the stream.
-        long n = stream1.count();
-        System.out.println("Number of elements: "+n);// 3
-
-        // Re-creating the stream using Stream.of()
-        //   static <T> Stream<T> of(T... values)
-        Stream<Double> stream2 = Stream.of(numbers);
-        System.out.println("Number of elements: "+stream2.count()); // 3
-
-        Stream<String> stream3 = Stream.of("Austria", "New Zealand");
-        System.out.println("Number of elements: "+stream3.count()); // 2
-    }
-
- */

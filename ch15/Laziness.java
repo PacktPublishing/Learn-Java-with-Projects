@@ -1,22 +1,22 @@
 package ch15;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Laziness {
     public static void main(String []args){
-        var dogs = new ArrayList<String>();
-        dogs.add("Spot");
-        dogs.add("Rover");
-        var stream = dogs.stream();
-        dogs.add("Brownie");
-        System.out.println(stream.count());// 3
+//        var dogs = new ArrayList<String>();
+//        dogs.add("Spot");
+//        dogs.add("Rover");
+//        var stream = dogs.stream();
+//        dogs.add("Brownie");
+//        System.out.println(stream.count());// 3
 
 //        stream.count();
-//        names();
+        processNamesLazily();
     }
-    public static void names(){
+    public static void processNamesLazily(){
+
         List<String> names = Arrays.asList("April", "Ben", "Charlie",
                         "David", "Benildus", "Christian");
         names.stream()
