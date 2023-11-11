@@ -27,7 +27,7 @@ public class InfiniteStreamsIterate {
         //     T apply(T t)
         Stream<Integer> infStream = Stream.iterate(2, n -> n + 2);
 
-        // keeps going until I kill it.
+        // keeps going until the application is terminated manually
         infStream.forEach(System.out::println);
         
     }
