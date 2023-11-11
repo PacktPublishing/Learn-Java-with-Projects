@@ -17,17 +17,17 @@ class Car{
 }
 public class CollectorsExamples {
     public static void main(String[] args) {
-        collectToSet();
-        collectToList();
-        doAveragingInt();
-        collectToMap();
-        collectToMapWithException();
-        collectToMapAndMerge();
-        collectToTreeMap();
-        groupByMapToList();
-        groupByMapToSet();
-        groupByTreeMapToList();
-        partitioningToList();
+//        collectToSet();
+//        collectToList();
+//        doAveragingInt();
+//        collectToMap();
+//        collectToMapWithException();
+//        collectToMapAndMerge();
+//        collectToTreeMap();
+//        groupByMapToList();
+//        groupByMapToSet();
+//        groupByTreeMapToList();
+//        partitioningToList();
         partitioningToSet();
     }
     public static void collectToSet(){
@@ -91,13 +91,13 @@ public class CollectorsExamples {
     }
     public static void partitioningToList(){
         Stream<String> names = Stream.of("Thomas", "Teresa",
-                                                "Mike", "Alan", "Peter");
+                                                "Mike", "Alan", "Peter", "Alan");
         Map<Boolean, List<String>> map =
                 names.collect(
                     // pass in a Predicate
                     Collectors.partitioningBy(s -> s.startsWith("T"))
                 );
-        System.out.println(map);// {false=[Mike, Alan, Peter],
+        System.out.println(map);// {false=[Mike, Alan, Peter, Alan],
                                 // true=[Thomas, Teresa]}
 
     }
