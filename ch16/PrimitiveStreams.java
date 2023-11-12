@@ -50,9 +50,6 @@ public class PrimitiveStreams {
         LongStream lStream2      = LongStream.of(1L, 2L, 3L);
         System.out.println(iStream2.count() + ", " +
                 dStream2.count() + ", " + lStream2.count());// 3, 3, 3
-
-        stats(IntStream.of(5, 10, 15, 20));
-        stats(IntStream.empty());
     }
     public static void stats(IntStream numbers){
         IntSummaryStatistics intStats =
