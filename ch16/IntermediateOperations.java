@@ -35,8 +35,8 @@ public class IntermediateOperations {
 //        doSortedOther();
 //        doFilter();
 //        doDistinct();
-//        doMap();
-        doFlatMap();
+        doMap();
+//        doFlatMap();
 //        doSorted2();
     }
     public static void doSortedOther() {
@@ -64,7 +64,7 @@ public class IntermediateOperations {
         Person john = new Person("John", 23);
         Person mary = new Person("Mary", 25);
         Stream.of(mary,john)
-                .sorted(Comparator.comparing(p -> p.getAge())) // Person::getAge
+                .sorted(Comparator.comparing(Person::getAge)) // p -> p.getAge()
                 .forEach(System.out::print);
     
     }
@@ -113,7 +113,7 @@ public class IntermediateOperations {
         // <R> Stream<R> map(Function<T,R> mapper)
         //     Function's functional method: R apply(T t);
         Stream.of("book", "pen", "ruler")
-                .map(s -> s.length()) // String::length
+                .map(String::length) // s -> s.length()
                 .forEach(System.out::print);// 435
     }
     public static void doLimit() {
