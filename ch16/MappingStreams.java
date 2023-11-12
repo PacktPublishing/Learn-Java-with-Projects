@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 public class MappingStreams {
     public static void main(String[] args) {
-//        mappingObjectStreams();
-        mappingPrimitiveStreams();
+        mappingObjectStreams();
+//        mappingPrimitiveStreams();
     }
     public static void mappingObjectStreams(){
         // Stream<T> to Stream<T>
@@ -23,7 +23,7 @@ public class MappingStreams {
         DoubleStream dblStream = Stream.of("ash", "beech", "sycamore")
                 // mapToDouble(ToDoubleFunction<T>)
                 //   ToDoubleFunction<T> is a functional interface:
-                //      double applyAsDouble(T value) => int applyAsDouble(String tree)
+                //      double applyAsDouble(T value) => double applyAsDouble(String tree)
                 .mapToDouble(tree -> tree.length()); // upcast in background
         dblStream.forEach(System.out::println); // 3.0, 5.0, 8.0
 
@@ -39,7 +39,7 @@ public class MappingStreams {
         LongStream longStream = Stream.of("ash", "beech", "sycamore")
                 // mapToLong(ToLongFunction<T>)
                 //   ToLongFunction<T> is a functional interface:
-                //      long applyAsLong(T value) => int applyAsLong(String tree)
+                //      long applyAsLong(T value) => long applyAsLong(String tree)
                 .mapToLong(tree -> tree.length()); // upcast in background
         longStream.forEach(System.out::println); // 3, 5, 8
 
