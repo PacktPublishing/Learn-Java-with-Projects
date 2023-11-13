@@ -17,10 +17,10 @@ public class ParallelStreams {
 //        parallelAddition();
 //        orderedSerialStreams();
 //        unorderedParalleltreams();
-        parallelReduction1();
+//        parallelReduction1();
 //        parallelReduction2();
 //        associativity();
-//        concurrentCollection();
+        concurrentCollection();
 //        serialStream();
     }
     public static void concurrentCollection(){
@@ -237,8 +237,8 @@ public class ParallelStreams {
  */
 /*
             int result = Stream.of(1,2,3,4,5)
-                    .reduce(0,
-                            (n1, n2) -> n1 - n2);
+                               .reduce(0,
+                                       (n1, n2) -> n1 - n2);
             System.out.println(result); // -15
 
  */
