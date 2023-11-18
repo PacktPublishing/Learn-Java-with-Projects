@@ -11,7 +11,7 @@ public class VoteCounter1 {
         for(int i=1; i<=4; i++) {
             int voteId = i;
             executor.execute(() -> {
-                System.out.println("Vote " + voteId + " counted by " + Thread.currentThread().getId());
+                System.out.println("Vote " + voteId + " counted by " + Thread.currentThread().threadId());
             });
         }
 

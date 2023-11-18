@@ -11,7 +11,7 @@ public class Count {
         try {
             lock.lock();
             int current = counter;
-            System.out.println("Before: " + counter + ", Current thread: " + Thread.currentThread().getId());
+            System.out.println("Before: " + counter + ", Current thread: " + Thread.currentThread().threadId());
             counter = current + 1;
             System.out.println("After: " + counter);
         } finally {
@@ -30,7 +30,7 @@ class Count2 {
         if (lock.tryLock()) {
             try {
                 int current = counter;
-                System.out.println("Before: " + counter + ", Current thread: " + Thread.currentThread().getId());
+                System.out.println("Before: " + counter + ", Current thread: " + Thread.currentThread().threadId());
                 counter = current + 1;
                 System.out.println("After: " + counter);
             } finally {

@@ -11,7 +11,7 @@ public class VoteCounter5 {
             final int stationId = i;
             executorService.submit(() -> {
                 try {
-                    System.out.println("Counting votes at station: " + stationId + ", Thread id: " + Thread.currentThread().getId());
+                    System.out.println("Counting votes at station: " + stationId + ", Thread id: " + Thread.currentThread().threadId());
                     Thread.sleep((int) (Math.random() * 200));
                 } catch (InterruptedException e) {
                     e.printStackTrace();

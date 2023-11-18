@@ -5,7 +5,7 @@ public class Count {
 
     static synchronized void incrementCounter() {
         int current = counter;
-        System.out.println("Before: " + counter + ", Current thread: " + Thread.currentThread().getId());
+        System.out.println("Before: " + counter + ", Current thread: " + Thread.currentThread().threadId());
         counter = current + 1;
         System.out.println("After: " + counter);
     }

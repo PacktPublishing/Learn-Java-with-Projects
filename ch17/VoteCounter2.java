@@ -30,7 +30,7 @@ public class VoteCounter2 {
     public static Future<Integer> getRandomVote(int i) {
         return executorService.submit(() -> {
             Thread.sleep(1000); // simulate delay
-            System.out.println("Vote " + i + " counted by " + Thread.currentThread().getId());
+            System.out.println("Vote " + i + " counted by " + Thread.currentThread().threadId());
             return 1; // each vote counts as 1
         });
     }
