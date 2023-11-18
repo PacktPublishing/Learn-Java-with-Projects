@@ -1,30 +1,16 @@
 package ch15.exercises;
 
-import java.time.LocalDate;
-import java.util.Objects;
-
 public class Dinosaur {
     private String name;
-    private LocalDate birthday;
-    private int dangerLevel;
-    private boolean asleep;
-    private String diet;
-    private boolean ill;
+    private String species;
+    private int healthScore;
 
-    public Dinosaur(String name, LocalDate birthday) {
+    public Dinosaur() { }
+
+    public Dinosaur(String name, String species, int healthScore) {
         this.name = name;
-        this.birthday = birthday;
-    }
-
-    public Dinosaur() {}
-
-    public Dinosaur(String name, LocalDate birthday, int dangerLevel, boolean asleep, String diet, boolean ill) {
-        this.name = name;
-        this.birthday = birthday;
-        this.dangerLevel = dangerLevel;
-        this.asleep = asleep;
-        this.diet = diet;
-        this.ill = ill;
+        this.species = species;
+        this.healthScore = healthScore;
     }
 
     public String getName() {
@@ -35,49 +21,28 @@ public class Dinosaur {
         this.name = name;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
+    public String getSpecies() {
+        return species;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
-    public int getDangerLevel() {
-        return dangerLevel;
+    public int getHealthScore() {
+        return healthScore;
     }
 
-    public void setDangerLevel(int dangerLevel) {
-        this.dangerLevel = dangerLevel;
-    }
-
-    public boolean isAsleep() {
-        return asleep;
-    }
-
-    public void setAsleep(boolean asleep) {
-        this.asleep = asleep;
-    }
-
-    public String getDiet() {
-        return diet;
-    }
-
-    public void setDiet(String diet) {
-        this.diet = diet;
-    }
-
-    public boolean isIll() {
-        return ill;
-    }
-
-    public void setIll(boolean ill) {
-        this.ill = ill;
+    public void setHealthScore(int healthScore) {
+        this.healthScore = healthScore;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name, birthday);
+    public String toString() {
+        return "Dinosaur{" +
+                "name='" + name + '\'' +
+                ", species='" + species + '\'' +
+                ", healthScore=" + healthScore +
+                '}';
     }
-
 }
