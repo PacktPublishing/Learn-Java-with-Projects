@@ -16,7 +16,7 @@ final class Farm { // cannot subclass this class and all methods are final
         this.animals      = new ArrayList<String>(animals); // create a new ArrayList
 //        this.animals        = animals; // breaking encapsulation!
     }
-    // factory method to create a Department
+    // factory method to create a Farm
     public static Farm createNewInstance(String name, int numAnimals,
                                          List<String> animals){
         return new Farm(name, numAnimals, animals);
