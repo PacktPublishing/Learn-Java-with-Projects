@@ -7,16 +7,16 @@ public record Person(String name, Integer age) {
 //    public Person(String name, Integer age)  {
 //        if(age < 18){
 //            this.name = "Error"; this.age = -1;
+//        } else { // forgot this in Edition 1
+//            this.name = name;
+//            this.age  = age;
 //        }
-//        this.name = name;
-//        this.age  = age;
 //    }
-        // compact constructor
-        public Person  {
-            if(age < 18){
-                name = "Error"; age = -1;
-            }
+    public Person  {   // compact constructor
+        if(age < 18){
+            name = "Error"; age = -1;
         }
+    }
 }
 class PersonTest{
     public static void main(String[] args) {
@@ -71,3 +71,38 @@ public final class Person {
 }
 */
 
+/*
+public record Person(String name, Integer age) {
+    // compact canonical constructor
+//    public Person(String name, Integer age)  {
+//        if(age < 18){
+//            this.name = "Error"; this.age = -1;
+//        } else {
+//            this.name = name;
+//            this.age  = age;
+//        }
+//    }
+        // compact constructor
+        public Person  {
+            if(age < 18){
+                name = "Error"; age = -1;
+            }
+        }
+}
+class PersonTest{
+    public static void main(String[] args) {
+        Person p1 = new Person("Joe Bloggs", 20);
+        System.out.println(p1);         // Person[name=Joe Bloggs, age=20]
+        System.out.println(p1.name());  // Joe Bloggs
+        System.out.println(p1.age());   // 20
+    }
+}
+
+ */
+/*
+if(obj instanceof Person p){ // type pattern
+    String name = p.name(); // accessor
+    int age = p.age(); // accessor
+    System.out.println(name + "," + age);
+}
+ */
